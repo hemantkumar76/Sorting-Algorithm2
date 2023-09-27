@@ -144,28 +144,31 @@ int length()
     }
     return length;
 }
-void sorting()
-{
-    int i, j, k;
-    int temp;
-    struct node *mid;
-    struct node *next;
-    int size = length();
-    k = size;
-    for (i = 0; i < size - 1; i++, k--)
-    {
-        mid = head;
-        next = head->next;
-        for (j = 1; j < k; j++)
-        {
-            if (mid->data > next->data)
-            {
-                temp = mid->data;
-                mid->data = next->data;
-                next->data = temp;
-            }
-            mid = mid->next;
-            next = next->next;
-        }
+
+void bubbleSort() {
+    int swapped;
+    struct node *ptr;
+    struct node *last = NULL;
+    
+    if (head == NULL) {
+        return; // No elements to sort
     }
+    
+    do {
+        swapped = 0;
+        ptr = head;
+        
+        while (ptr->next != last) {
+            if (ptr->data > ptr->next->data) {
+                // Swap data
+                int temp = ptr->data;
+                ptr->data = ptr->next->data;
+                ptr->next->data = temp;
+                swapped = 1;
+            }
+            ptr = ptr->next;
+        }
+        last = ptr;
+    } while (swapped);
 }
+
